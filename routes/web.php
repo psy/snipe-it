@@ -465,7 +465,13 @@ Route::group(['middleware' => 'web'], function () {
 
 });
 
-Auth::routes();
+// Special routes for dom2pdf to access qr codes
+Route::group(['prefix' => 'qr'], function () {
+    Route::get('{assetId}/qr_code', [ 'uses' => 'QrController@getQrCode' ]);
+    Route::get('{assetId}/barcode', [ 'uses' => 'QrController@getBarCode' ]);
+});
 
+
+Auth::routes();
 
 

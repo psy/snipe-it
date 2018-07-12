@@ -23,6 +23,7 @@
     "league/csv": "^8.1",
     "maknz/slack": "^1.7",
     "neitanod/forceutf8": "^2.0",
+    "niklasravnsborg/laravel-pdf": "^2.0",
     "patchwork/utf8": "~1.2",
     "phpdocumentor/reflection-docblock": "3.2.2",
     "phpspec/prophecy": "1.6.2",

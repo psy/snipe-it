@@ -30,6 +30,7 @@ use League\Csv\Reader;
 use Log;
 use Mail;
 use Paginator;
+use PDF;
 use Redirect;
 use Response;
 use Slack;
@@ -1067,11 +1068,19 @@ class AssetsController extends Controller
 
         if ($request->has('bulk_actions')) {
             if ($request->input('bulk_actions')=='labels') {
-                $count = 0;
-                return view('hardware/labels')
-                    ->with('assets', Asset::find($asset_ids))
-                    ->with('settings', Setting::getSettings())
-                    ->with('count', $count);
+                $pdf = PDF::loadView('hardware/labels-pdf',
+                    array('assets' => Asset::find($asset_ids),
+                        'settings' => Setting::getSettings()),
+                        [],
+                        [
+                            'margin_top' => 0,
+                            'margin_bottom' => 0,
+                            'margin_left' => 0,
+                            'margin_right' => 0,
+                            'margin_header' => 0,
+                            'margin_footer' => 0
+                        ]);
+                return $pdf->stream('label.pdf');
             } elseif ($request->input('bulk_actions')=='delete') {
                 $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
                 $assets->each(function ($asset) {
