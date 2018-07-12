@@ -9,6 +9,7 @@
 app/database/*.sqlite
 app/storage/meta/services.json
 composer.phar
+config/pdf.php
 crowdin.yaml
 Homestead.json
 Homestead.yaml
